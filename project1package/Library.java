@@ -3,7 +3,7 @@ import java.util.*;
 
 
 
-public class Collection
+public class Library
 {
 	final String PLAYLIST_DESTINATION = "project1package\\test_Tracks.csv";	
 	private List<Song> mySongs;
@@ -12,12 +12,12 @@ public class Collection
 	private Set<String> genres = new HashSet<String>();
 	
 	
-	public Collection()
+	public Library()
 	{
 		this.mySongs = new ArrayList<Song>();
 	}
 
-	public Collection(List<Song> mySongs)
+	public Library(List<Song> mySongs)
 	{
 		this.mySongs = mySongs;
 	}

@@ -1,5 +1,11 @@
 
 package project1package;
+
+/*
+ * Josh Hicks
+ * CSCI 3381
+ * Project 1
+ */
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -8,21 +14,21 @@ public class Tester
 {
 	public static void main(String[] args)
 	{
-		Collection p = new Collection();
+		Library lib = new Library();
 		//Calls the Collection class to load the playlist from the text file
-		p.loadPlaylist();
+		lib.loadPlaylist();
 		
 		//Adds a new song to the playlist
-		p.addSong(new Song(111667,"Josh", "blues", "ButterFly Boys", "Fly Away", 2020, 000));
+		lib.addSong(new Song(111667,"Josh", "blues", "ButterFly Boys", "Fly Away", 2020, 000));
 		
 		//Prints out my 111667 Song
-		System.out.print(p.findSongById(111667));
+		System.out.print(lib.findSongById(111667));
 				
 		//Removes song 111667 From the songs
-		p.removeSong(p.findSongById(111667));
+		lib.removeSong(lib.findSongById(111667));
 		
 		//Prints out all songs with artist name of Josh to see if 111667 is still in the list
-		p.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
+		lib.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
 		
 		//Creates new Song
 		Song s = new Song();
@@ -44,22 +50,22 @@ public class Tester
 		System.out.println(s.getGenre());
 		System.out.println(s.getArtist_longitude());
 		
-		p.addSong(s);
+		lib.addSong(s);
 		
 		s = new Song("123456, Josh, Hip Hop, Kong Fuey, Jump, 2020, 0.354");
 		
 		System.out.println(s);
 		
-		p.addSong(s);
+		lib.addSong(s);
 		//Prints out all songs with artist name of Josh to see if 111667 is still in the list
-		p.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
+		lib.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
 		
 		//Remove all songs by Josh Armistead because he's a copier
-		p.removeSongsByArtist("Josh Armistead");
+		lib.removeSongsByArtist("Josh Armistead");
 		
 		//Prints out all songs with artist name of Josh to see if 111667 is still in the list
 		System.out.println("Removed Josh Armistead");
-		p.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
+		lib.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
 
 		/*
 		int c = 0;		
