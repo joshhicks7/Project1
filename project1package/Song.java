@@ -91,6 +91,7 @@ public class Song
 		this.artist_longitude = artist_longitude;
 	}
 	
+	//Id, artist_name, genre, track_title, album, year_created, artist_longitude
 	public Song(String songString)
 	{
 		String[] ar = songString.split(",");
@@ -103,6 +104,7 @@ public class Song
 		this.artist_longitude = Double.parseDouble(removeSpaces(ar[6]));
 	}
 	
+
 	public String toString()
 	{
 		return track_id + "," + artist_name + "," + genre + "," + track_title + ',' + album_title + ',' + year_created + ',' + artist_longitude;

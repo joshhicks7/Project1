@@ -8,36 +8,66 @@ public class Tester
 {
 	public static void main(String[] args)
 	{
-		Playlist p = new Playlist();
-		//Song(int track_id, String artist_name, String genre, String track_title,  String album_title, int year_created, double artist_longitude)
-		//p.addSong(new Song(0, "josh", "butterfly_jazz", "bobby", "The Wasp", 2019, -134.234));	
-		//p.addSong(new Song(1, "josh", "butterfly_jazz", "bobby", "The Wasp", 2019, -134.234));
-		//p.addSong(new Song("2, jimmy, bananza, celery, buttons,2000,123.4"));
-		//System.out.print(p);
-		
-		/*System.out.print(System.getProperty("user.dir"));
-		
-		String s = (FileHandler.readFile("project1package\\finalTracks.csv", 100));
-		
-		System.out.print(s);
-		
-		String[] ar = s.split("\n");
-		
-		for(String st : ar)
-		{
-			p.addSong(new Song(st));
-		}
-		
-		System.out.print(p);
-		*/
+		Collection p = new Collection();
+		//Calls the Collection class to load the playlist from the text file
 		p.loadPlaylist();
 		
-		int[] c = {0};
+		//Adds a new song to the playlist
+		p.addSong(new Song(111667,"Josh", "blues", "ButterFly Boys", "Fly Away", 2020, 000));
+		
+		//Prints out my 111667 Song
+		System.out.print(p.findSongById(111667));
+				
+		//Removes song 111667 From the songs
+		p.removeSong(p.findSongById(111667));
+		
+		//Prints out all songs with artist name of Josh to see if 111667 is still in the list
+		p.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
+		
+		//Creates new Song
+		Song s = new Song();
+		s.setTrack_id(118897);
+		s.setArtist_name("Josh Hopper");
+		s.setAlbum_title("NSync Cover");		
+		s.setTrack_title("HomeBoy Rodeo");
+		s.setArtist_longitude(11.345);
+		s.setGenre("Computer");		
+		s.setYear_created(2015);
+		System.out.println(s);
+		
+		//Prints all information about current song
+		System.out.println(s.getTrack_id());
+		System.out.println(s.getArtist_name());
+		System.out.println(s.getAlbum_title());
+		System.out.println(s.getYear_created());
+		System.out.println(s.getArtist_name());
+		System.out.println(s.getGenre());
+		System.out.println(s.getArtist_longitude());
+		
+		p.addSong(s);
+		
+		s = new Song("123456, Josh, Hip Hop, Kong Fuey, Jump, 2020, 0.354");
+		
+		System.out.println(s);
+		
+		p.addSong(s);
+		//Prints out all songs with artist name of Josh to see if 111667 is still in the list
+		p.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
+		
+		//Remove all songs by Josh Armistead because he's a copier
+		p.removeSongsByArtist("Josh Armistead");
+		
+		//Prints out all songs with artist name of Josh to see if 111667 is still in the list
+		System.out.println("Removed Josh Armistead");
+		p.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
+
+		/*
+		int c = 0;		
+		//Gets user input to select a song
 		Scanner input = new Scanner(System.in);
-		while(c[0] > -1)
+		while(c > -1)
 		{
 			System.out.println("What would you like to do?");
-			System.out.println("For multiples type a comma between (EX: 0,1 for artist and id)");
 			System.out.println("Look Up Id? (0)");
 			System.out.println("Look Up Artist? (1)");
 			System.out.println("Look Up Genre? (2)");
@@ -46,27 +76,25 @@ public class Tester
 			System.out.println("Look Up Year? (5)");
 			System.out.println("Look Up Longitude? (6)");
 			System.out.println("Remove Song? (7)");
-			
 
-
-			String str = input.nextLine();
-			c = Arrays.stream(str.split(",")).mapToInt(Integer::parseInt).toArray();
+			String str = input.nextLine();		
 			
 			
-			
-			if(c[0] < 0)
+			if(c < 0)
 			{
 				break;
 			}
 			
+		}
+		*/
 			//Playlist p2 = new Playlist(p.getSongs());//.stream().filter(s -> (s.getId() > 1000));
 			//p2.getSongs().removeIf(s -> s.getId() > 1000);
 			
 			//System.out.print(new Playlist((p.getSongs().stream().filter(s -> s.getTrack_id() < 100).collect(Collectors.toList()))));
 			
 			
-			System.out.println(String.join(",", p.getGenres()));
-			System.out.print(String.join(",", p.getArtists()));
+			//System.out.println(String.join(",", p.getGenres()));
+			//System.out.print(String.join(",", p.getArtists()));
 			
 			/*
 			if(c[0] <= 6)
@@ -80,12 +108,12 @@ public class Tester
 				System.out.print("GO: ");
 				p.removeSong(p.findSong(Integer.parseInt(input.nextLine())));
 			}
-			*/
-
+			
+			input.close();
+			p.savePlaylist();
 		}
-		
-		input.close();
-		p.savePlaylist();
+		*/
+
 		
 	}
 	

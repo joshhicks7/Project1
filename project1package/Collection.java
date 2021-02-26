@@ -3,7 +3,7 @@ import java.util.*;
 
 
 
-public class Playlist
+public class Collection
 {
 	final String PLAYLIST_DESTINATION = "project1package\\test_Tracks.csv";	
 	private List<Song> mySongs;
@@ -12,12 +12,12 @@ public class Playlist
 	private Set<String> genres = new HashSet<String>();
 	
 	
-	public Playlist()
+	public Collection()
 	{
 		this.mySongs = new ArrayList<Song>();
 	}
 
-	public Playlist(List<Song> mySongs)
+	public Collection(List<Song> mySongs)
 	{
 		this.mySongs = mySongs;
 	}
@@ -28,8 +28,10 @@ public class Playlist
 		{
 			mySongs.add(song);
 		}
+		
 	}
-
+	
+	//Removes song by just song
 	public void removeSong(Song song)
 	{
 		if(mySongs.contains(song))
@@ -38,7 +40,23 @@ public class Playlist
 		}
 	}
 	
-	public Song findSong(int song_id)
+	public void removeSongsByArtist(String artist)
+	{
+		while(findSongsByArtistName(artist) != null)
+		{
+			for(Song s : mySongs)
+			{
+				if(s.getArtist_name().toLowerCase().equals(artist.toLowerCase()))
+				{
+					removeSong(s);
+					break;
+				}
+			}
+		}
+		
+	}
+	
+	public Song findSongById(int song_id)
 	{
 		for(int i = 0; i < mySongs.size(); i++)
 		{
@@ -49,6 +67,18 @@ public class Playlist
 		}
 		
 		return null;
+	}
+	
+	public List<Song> findSongsByArtistName(String artist)
+	{
+		List<Song> ss = new ArrayList();
+		
+		mySongs.forEach(x->{if(x.getArtist_name().toLowerCase().contains(artist.toLowerCase())) {ss.add(x);}});
+		if(ss.size() == 0 )
+		{
+			return null;
+		}
+		return ss;
 	}
 	
 	public String toString()
@@ -107,16 +137,24 @@ public class Playlist
 		
 	}
 	
+	public Iterator<Song> iterator()
+	{
+		return mySongs.iterator();
+	}
+	
+	//Returns a list of all songs
 	public List<Song> getSongs()
 	{
 		return this.mySongs;
 	}
 	
+	//Returns a set of all genres
 	public Set<String> getGenres()
 	{
 		return this.genres;
 	}
 	
+	//Returns a set of all artists
 	public Set<String> getArtists()
 	{		
 		return this.artists;		
