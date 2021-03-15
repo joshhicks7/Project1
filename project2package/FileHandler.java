@@ -1,10 +1,19 @@
-package project1package;
+package project2package;
 import java.util.*;
 import java.util.stream.Stream;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class FileHandler
 {
+	public static final String PLAYLIST_DESTINATION = "project2package\\test_Tracks.csv";	
+	public static final String IMAGE_STRING = "project2package\\ear.png";
 	
 	String contents;
 	int line;
@@ -21,7 +30,6 @@ public class FileHandler
 			while(input.hasNextLine())
 			{
 				String next = input.nextLine();
-				//if(next.toLowerCase().contains(pattern.toLowerCase()))
 				{
 					contents += next + '\n';
 				}
@@ -32,12 +40,25 @@ public class FileHandler
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		
 		return contents;
 		
+	}
+		
+	public static BufferedImage readImage(String file)
+	{
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File(file));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return image;
 	}
 	
 	public static String readFile(String file, int maxNum)
@@ -89,4 +110,5 @@ public class FileHandler
 			e.printStackTrace();
 		}
 	}
+
 }

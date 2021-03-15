@@ -1,5 +1,5 @@
 
-package project1package;
+package project2package;
 
 /*
  * Josh Hicks
@@ -28,7 +28,7 @@ public class Tester
 		lib.removeSong(lib.findSongById(111667));
 		
 		//Prints out all songs with artist name of Josh to see if 111667 is still in the list
-		lib.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
+		System.out.print(lib.findSongsByArtistName("Josh"));//.forEach(x->{System.out.println(x);});
 		
 		//Creates new Song
 		Song s = new Song();
@@ -58,14 +58,14 @@ public class Tester
 		
 		lib.addSong(s);
 		//Prints out all songs with artist name of Josh to see if 111667 is still in the list
-		lib.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
+		System.out.print(lib.findSongsByArtistName("Josh"));
 		
 		//Remove all songs by Josh Armistead because he's a copier
 		lib.removeSongsByArtist("Josh Armistead");
 		
 		//Prints out all songs with artist name of Josh to see if 111667 is still in the list
 		System.out.println("Removed Josh Armistead");
-		lib.findSongsByArtistName("Josh").forEach(x->{System.out.println(x);});
+		System.out.print(lib.findSongsByArtistName("Josh"));
 
 		/*
 		int c = 0;		

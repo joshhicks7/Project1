@@ -1,8 +1,9 @@
-package project1package;
+package project2package;
 
 
 public class Song
 {
+	public static final String[] SONG_ATTRIBUTES = {"Track Id", "Artist Name", " Track Title"}; 
 	private int track_id = 0;
 	private String artist_name;
 	
@@ -102,8 +103,7 @@ public class Song
 		this.album_title = ar[4];
 		this.year_created = Integer.parseInt(removeSpaces(ar[5]));
 		this.artist_longitude = Double.parseDouble(removeSpaces(ar[6]));
-	}
-	
+	}	
 
 	public String toString()
 	{

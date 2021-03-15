@@ -1,17 +1,14 @@
-package project1package;
+package project2package;
 import java.util.*;
 
 
 
 public class Library
 {
-	final String PLAYLIST_DESTINATION = "project1package\\test_Tracks.csv";	
-	private List<Song> mySongs;
-	
-	private Set<String> artists = new HashSet<String>();
-	private Set<String> genres = new HashSet<String>();
-	
-	
+	private List<Song> mySongs;	
+	private SortedSet<String> artists = new TreeSet<String>();
+	private SortedSet<String> genres = new TreeSet<String>();
+		
 	public Library()
 	{
 		this.mySongs = new ArrayList<Song>();
@@ -69,7 +66,7 @@ public class Library
 		return null;
 	}
 	
-	public List<Song> findSongsByArtistName(String artist)
+	public Library findSongsByArtistName(String artist)
 	{
 		List<Song> ss = new ArrayList();
 		
@@ -78,8 +75,60 @@ public class Library
 		{
 			return null;
 		}
-		return ss;
+		return new Library(ss);
 	}
+	
+	public Library findSongsByGenre(String genre)
+	{
+		List<Song> ss = new ArrayList();
+		
+		mySongs.forEach(x->{if(x.getGenre().toLowerCase().contains(genre.toLowerCase())) {ss.add(x);}});
+		if(ss.size() == 0 )
+		{
+			return null;
+		}
+		return new Library(ss);
+	}
+	
+	public Library findSongsByAlbum(String album)
+	{
+		List<Song> ss = new ArrayList();
+		
+		mySongs.forEach(x->{if(x.getAlbum_title().toLowerCase().contains(album.toLowerCase())) {ss.add(x);}});
+		if(ss.size() == 0 )
+		{
+			return null;
+		}
+		return new Library(ss);
+	}
+	
+	public Library findSongsByYear(String year)
+	{
+		List<Song> ss = new ArrayList();
+		
+		mySongs.forEach(x->{if((x.getYear_created() + "").toLowerCase().contains(year.toLowerCase())) {ss.add(x);}});
+		if(ss.size() == 0 )
+		{
+			return null;
+		}
+		return new Library(ss);
+	}
+		
+	public Library getByAll(String comp)
+	{
+		Library l = new Library();
+		
+		for(Song s : mySongs)
+		{
+			if(s.toString().toLowerCase().contains(comp.toLowerCase()))
+			{
+				l.addSong(s);
+			}
+		}
+		
+		return l;
+	}
+	
 	
 	public String toString()
 	{
@@ -99,21 +148,24 @@ public class Library
 	
 	public void savePlaylist()
 	{
-		FileHandler.writeFile(PLAYLIST_DESTINATION, this.toString());
+		FileHandler.writeFile(FileHandler.PLAYLIST_DESTINATION, this.toString());
 	}
 	
 	public void loadPlaylist()
 	{
-		String contents = FileHandler.readFile(PLAYLIST_DESTINATION);
+		String contents = FileHandler.readFile(FileHandler.PLAYLIST_DESTINATION);
 		String[] ar = contents.split("\n");
+		genres = new TreeSet<String>();
 		
 		for(String st : ar)
 		{
 			Song s = new Song(st);
 			genres.add(s.getGenre());
 			artists.add(s.getArtist_name());
+			
 			addSong(s);			
 		}		
+		System.out.print(genres.toArray());
 	}
 	
 	public static void CheckPattern(String pattern, int... def)
@@ -159,6 +211,26 @@ public class Library
 	{		
 		return this.artists;		
 	}
+
+	public void add(Library rhs)
+	{		
+		if(rhs == null)return;
+		if(rhs.hasSong())
+		{
+			Iterator<Song> it = rhs.iterator();		
+			while(it.hasNext())
+			{
+				addSong(it.next());
+			}
+		}		
+		
+	}
+
+	public void Play(Song s)
+	{
+		
+	}
+
 }
 
 
